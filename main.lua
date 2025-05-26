@@ -1,5 +1,24 @@
+local Square = {}
+Square.__index = Square
+
+function Square.new(x, y, h, w)
+    local self = setmetatable({}, Square)
+    self.x = x
+    self.y = y
+    self.w = w
+    self.h = h
+    return self
+end
+
+function Square:draw()
+    love.graphics.rectangle("line", self.x, self.y, self.h, self.w)
+end
+
+
+
 function love.load()
-    x, y, h, w = 100, 200, 50,50
+    
+    square = Square.new(100, 200, 50,50)
 
 end
 
@@ -10,24 +29,22 @@ function love.update()
     down = love.keyboard.isDown("s")
 
     if right then
-        x = x + 20
+        square.x = square.x + 20
     end
 
     if left then
-        x = x - 20
+        square.x = square.x - 20
     end
     if up then
-        y = y - 20
+        square.y = square.y - 20
     end
     if down then
-        y = y + 20
+        square.y = square.y + 20
     end
-
 
 
 end
 
 function love.draw()
-    love.graphics.rectangle("line", x, y, h, w)
-
+    square:draw()
 end
